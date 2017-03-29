@@ -65,6 +65,7 @@ static struct Command c[] = {
 	{ "window_rev_cycle_in_group" , IPCWindowRevCycleInGroup ,  0 , NULL        } ,
 	{ "window_cardinal_focus"     , IPCWindowCardinalFocus   ,  1 , fn_direction} ,
 	{ "window_focus"              , IPCWindowFocus           ,  1 , fn_hex      } ,
+	{ "window_focus_last"         , IPCWindowFocusLast       ,  0 , NULL        } ,
 	{ "group_add_window"          , IPCGroupAddWindow        ,  1 , fn_naturals } ,
 	{ "group_remove_window"       , IPCGroupRemoveWindow     ,  0 , NULL        } ,
 	{ "group_remove_all_windows"  , IPCGroupRemoveAllWindows ,  1 , fn_naturals } ,
@@ -87,9 +88,16 @@ static struct ConfigEntry configs[] = {
 	{ "enable_sloppy_focus" , IPCConfigEnableSloppyFocus , fn_bool     },
 	{ "sticky_windows"      , IPCConfigStickyWindows     , fn_bool     },
 	{ "enable_borders"      , IPCConfigEnableBorders     , fn_bool     },
+	{ "enable_last_window_focusing", IPCConfigEnableLastWindowFocusing, fn_bool },
 	{ "spawn_location"      , IPCConfigSpawnLocation     , fn_win_pos  },
 };
 
+/*
+ * An offset is a pair of two signed integers.
+ *
+ * data[0], data[1] - if 1, then the number in negative
+ * data[2], data[3] - the actual numbers, unsigned
+ */
 static bool
 fn_offset(uint32_t *data, int argc, char **argv)
 {
@@ -149,12 +157,11 @@ fn_bool(uint32_t *data, int argc, char **argv) {
 
 static bool
 fn_config(uint32_t *data, int argc, char **argv) {
-	char *key, *value;
+	char *key;
 	bool status;
 	int i;
 
 	key = argv[0];
-	value = argv[1];
 
 	i = 0;
 	while (i < NR_IPC_CONFIGS && strcmp(key, configs[i].key) != 0)
@@ -322,7 +329,6 @@ send_command(struct Command *c, int argc, char **argv)
 	xcb_generic_error_t *err;
 	xcb_void_cookie_t cookie;
 	bool status = true;
-	size_t str_size;
 
 	msg.response_type = XCB_CLIENT_MESSAGE;
 	msg.type = get_atom(ATOM_COMMAND);
@@ -367,7 +373,6 @@ int main(int argc, char **argv)
 	int i;
 	int command_argc;
 	char **command_argv;
-	int opt;
 
 	if (argc == 1) {
 		usage(argv[0], EXIT_FAILURE);

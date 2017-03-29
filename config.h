@@ -30,6 +30,9 @@
 /* if true, paint borders */
 #define BORDERS true
 
+/* if true, focus last window when the currently focused window is unmapped */
+#define LAST_WINDOW_FOCUSING true
+
 /* Monitor index to spawn new windows */
 #define MONITOR -1
 

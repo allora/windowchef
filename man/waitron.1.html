@@ -138,6 +138,7 @@ anything on <code>stdout</code>.</p>
   focused window.</p></dd>
 <dt><code>window_focus</code> <var>id</var></dt><dd><p>  Focus window by <var>id</var>. The <var>id</var> can be found using <span class="man-ref">pfw<span class="s">(1)</span></span> or <span class="man-ref">lsw<span class="s">(1)</span></span> from
   <a href="https://github.com/wmutils/core/">wmutils</a>.</p></dd>
+<dt><code>window_focus_last</code></dt><dd><p>  Focus the window that was focused before the currently focused window.</p></dd>
 <dt><code>window_cardinal_focus</code> <var>DIRECTION</var></dt><dd><p>  Focus the closest window in a direction, relative to the currently
   currently focused window. Does nothing if there is no window focused.</p></dd>
 <dt><code>group_add_window</code> <var>group_nr</var></dt><dd><p>  Add the focused window to the <var>group_nr</var> group.</p>
@@ -197,6 +198,8 @@ are:</p>
 <dt><code>enable_borders</code> <var>BOOL</var></dt><dd><p>  If true, border colors will be set each time a window gets/loses focus.
   Setting it to false is useful when using another program to draw the borders
   (example: <code>chwb2</code> from wmutils).</p></dd>
+<dt><code>enable_last_window_focusing</code> <var>BOOL</var></dt><dd><p>  If true, when the currently focused window is unmapped or closed, <code>windowchef</code> will focus the
+  previously focused window. See the <code>window_focus_last</code> command.</p></dd>
 </dl>
 
 
@@ -215,7 +218,7 @@ are:</p>
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'>Windowchef</li>
-    <li class='tc'>February 2017</li>
+    <li class='tc'>March 2017</li>
     <li class='tr'>waitron(1)</li>
   </ol>
 

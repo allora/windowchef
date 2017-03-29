@@ -26,6 +26,7 @@ enum IPCCommand {
 	IPCWindowRevCycleInGroup,
 	IPCWindowCardinalFocus,
 	IPCWindowFocus,
+	IPCWindowFocusLast,
 	IPCGroupAddWindow,
 	IPCGroupRemoveWindow,
 	IPCGroupRemoveAllWindows,
@@ -49,6 +50,7 @@ enum IPCConfig {
 	IPCConfigEnableSloppyFocus,
 	IPCConfigStickyWindows,
 	IPCConfigEnableBorders,
+	IPCConfigEnableLastWindowFocusing,
 	IPCConfigSpawnLocation,
 	NR_IPC_CONFIGS
 };

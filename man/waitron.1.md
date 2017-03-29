@@ -95,6 +95,9 @@ anything on `stdout`.
 	Focus window by <id>. The <id> can be found using pfw(1) or lsw(1) from
 	[wmutils](https://github.com/wmutils/core/).
 
+* `window_focus_last`:
+	Focus the window that was focused before the currently focused window.
+
 * `window_cardinal_focus` <DIRECTION>:
 	Focus the closest window in a direction, relative to the currently
 	currently focused window. Does nothing if there is no window focused.
@@ -188,6 +191,10 @@ are:
 	If true, border colors will be set each time a window gets/loses focus.
 	Setting it to false is useful when using another program to draw the borders
 	(example: `chwb2` from wmutils).
+
+* `enable_last_window_focusing` <BOOL>:
+	If true, when the currently focused window is unmapped or closed, `windowchef` will focus the
+	previously focused window. See the `window_focus_last` command.
 
 ## SEE ALSO
 
