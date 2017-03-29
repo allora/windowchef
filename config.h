@@ -30,4 +30,10 @@
 /* if true, paint borders */
 #define BORDERS true
 
+/* Monitor index to spawn new windows */
+#define MONITOR -1
+
+/* Position on the monitor to spawn new windows */
+#define WINDOW_POSITION CENTER
+
 #endif

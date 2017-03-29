@@ -49,6 +49,7 @@ enum IPCConfig {
 	IPCConfigEnableSloppyFocus,
 	IPCConfigStickyWindows,
 	IPCConfigEnableBorders,
+	IPCConfigSpawnLocation,
 	NR_IPC_CONFIGS
 };
 

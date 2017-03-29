@@ -80,6 +80,7 @@ static void set_focused_last_best();
 static void raise_window(xcb_window_t);
 static void close_window(struct client *);
 static void delete_window(xcb_window_t);
+static void find_window_spawn_location(struct client *, int16_t *, int16_t *);
 static void teleport_window(xcb_window_t, int16_t, int16_t);
 static void move_window(xcb_window_t , int16_t, int16_t);
 static void resize_window_absolute(xcb_window_t, uint16_t, uint16_t);
@@ -819,6 +820,89 @@ delete_window(xcb_window_t win)
 	ev.data.data32[1] = XCB_CURRENT_TIME;
 
 	xcb_send_event(conn, 0, win, XCB_EVENT_MASK_NO_EVENT, (char *)&ev);
+}
+
+/*
+ * Finds a window's default spawn location
+ */
+
+static void
+find_window_spawn_location(struct client *c, int16_t *x, int16_t *y)
+{
+	int16_t mon_x, mon_y;
+	uint16_t mon_width, mon_height;
+
+	struct list_item *items;
+	struct monitor *m;
+	int index = 0;
+
+	items = mon_list;
+	while (items != NULL) {
+		if (conf.monitor == index) {
+			break;
+		}
+
+		index++;
+		items = items->next;
+	}
+
+	if (items == NULL) {
+		get_monitor_size(c, &mon_x, &mon_y, &mon_width, &mon_height);
+	}
+	else {
+		m = items->data;
+		mon_x = m->x;
+		mon_y = m->y;
+		mon_width = m->width;
+		mon_height = m->height;
+	}
+
+	int16_t y_top = mon_y + conf.gap_up;
+	int16_t y_center = ((mon_y + mon_height) / 2) - (c->geom.height / 2);
+	int16_t y_bottom = (mon_y + mon_height) - c->geom.height - conf.gap_down - (conf.border_width * 2);
+
+	int16_t x_left = mon_x + conf.gap_left;
+	int16_t x_center = ((mon_x + mon_width) / 2) - (c->geom.width / 2);
+	int16_t x_right = (mon_x + mon_width) - c->geom.width - conf.gap_right - (conf.border_width * 2);
+
+	switch (conf.window_position) {
+		case TOP_LEFT:
+			*x = x_left;
+			*y = y_top;
+			break;
+		case TOP:
+			*x = x_center;
+			*y = y_top;
+			break;
+		case TOP_RIGHT:
+			*x = x_right;
+			*y = y_top;
+			break;
+		case LEFT:
+			*x = x_left;
+			*y = y_center;
+			break;
+		case CENTER:
+			*x = x_center;
+			*y = y_center;
+			break;
+		case RIGHT:
+			*x = x_right;
+			*y = y_center;
+			break;
+		case BOTTOM_LEFT:
+			*x = x_left;
+			*y = y_bottom;
+			break;
+		case BOTTOM:
+			*x = x_center;
+			*y = y_bottom;
+			break;
+		case BOTTOM_RIGHT:
+			*x = x_right;
+			*y = y_bottom;
+			break;
+	}
 }
 
 /*
@@ -2146,12 +2230,19 @@ event_map_request(xcb_generic_event_t *ev)
 			return;
 
 		if (!client->geom.set_by_user) {
-			if (!get_pointer_location(&scr->root, &client->geom.x, &client->geom.y))
-				client->geom.x = client->geom.y = 0;
+			if (conf.monitor > -1) {
+				find_window_spawn_location(client, &client->geom.x, &client->geom.y);
+				fprintf(stderr, "\nWindow Spawned at (%d,%d)\n", client->geom.x, client->geom.y);
+				teleport_window(client->window, client->geom.x, client->geom.y);
+			}
+			else {
+				if (!get_pointer_location(&scr->root, &client->geom.x, &client->geom.y))
+					client->geom.x = client->geom.y = 0;
 
-			client->geom.x -= client->geom.width / 2;
-			client->geom.y -= client->geom.height / 2;
-			teleport_window(client->window, client->geom.x, client->geom.y);
+				client->geom.x -= client->geom.width / 2;
+				client->geom.y -= client->geom.height / 2;
+				teleport_window(client->window, client->geom.x, client->geom.y);
+			}
 		}
 		if (conf.sticky_windows)
 			group_add_window(client, last_group);
@@ -2851,6 +2942,10 @@ ipc_wm_config(uint32_t *d)
 		case IPCConfigEnableBorders:
 			conf.borders = d[1];
 			break;
+        case IPCConfigSpawnLocation:
+            conf.monitor = d[1];
+            conf.window_position = d[2];
+            break;
 		default:
 			DMSG("!!! unhandled config key %d\n", key);
 			break;
@@ -2888,6 +2983,8 @@ load_defaults(void)
 	conf.sloppy_focus    = SLOPPY_FOCUS;
 	conf.sticky_windows  = STICKY_WINDOWS;
 	conf.borders         = BORDERS;
+	conf.monitor         = MONITOR;
+	conf.window_position = WINDOW_POSITION;
 }
 
 static void

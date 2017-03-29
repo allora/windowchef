@@ -28,6 +28,7 @@ static bool fn_hex(uint32_t *, int, char **);
 static bool fn_position(uint32_t *, int, char **);
 static bool fn_gap(uint32_t *, int, char **);
 static bool fn_direction(uint32_t *, int, char **);
+static bool fn_win_pos(uint32_t *, int, char **);
 
 static void usage(char *, int);
 static void version(void);
@@ -86,6 +87,7 @@ static struct ConfigEntry configs[] = {
 	{ "enable_sloppy_focus" , IPCConfigEnableSloppyFocus , fn_bool     },
 	{ "sticky_windows"      , IPCConfigStickyWindows     , fn_bool     },
 	{ "enable_borders"      , IPCConfigEnableBorders     , fn_bool     },
+	{ "spawn_location"      , IPCConfigSpawnLocation     , fn_win_pos  },
 };
 
 static bool
@@ -254,6 +256,41 @@ fn_gap(uint32_t *data, int argc, char **argv)
 	status = status && fn_naturals(data + 1, 1, argv + 1);
 
 	return status;
+}
+
+static bool
+fn_win_pos(uint32_t *data, int argc, char **argv)
+{
+	char *pos = argv[1];
+	enum position spawn_pos;
+
+	data[0] = strtol(argv[0], NULL, 10);
+
+	if (strcasecmp(pos, "topleft") == 0)
+		spawn_pos = TOP_LEFT;
+	else if (strcasecmp(pos, "topright") == 0)
+		spawn_pos = TOP_RIGHT;
+	else if (strcasecmp(pos, "bottomleft") == 0)
+		spawn_pos = BOTTOM_LEFT;
+	else if (strcasecmp(pos, "bottomright") == 0)
+		spawn_pos = BOTTOM_RIGHT;
+	else if (strcasecmp(pos, "middle") == 0)
+		spawn_pos = CENTER;
+	else if (strcasecmp(pos, "left") == 0)
+		spawn_pos = LEFT;
+	else if (strcasecmp(pos, "bottom") == 0)
+		spawn_pos = BOTTOM;
+	else if (strcasecmp(pos, "top") == 0)
+		spawn_pos = TOP;
+	else if (strcasecmp(pos, "right") == 0)
+		spawn_pos = RIGHT;
+	else
+		return false;
+
+	(void)(argc);
+	data[1] = spawn_pos;
+
+	return true;
 }
 
 static void

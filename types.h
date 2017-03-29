@@ -72,6 +72,8 @@ struct conf {
 	bool sloppy_focus;
 	bool sticky_windows;
 	bool borders;
+	int8_t monitor;
+	enum position window_position;
 };
 
 #endif
