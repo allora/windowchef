@@ -50,6 +50,8 @@ The default configuration file is `~/.config/windowchef/windowchefrc`. It is usu
 a shell script that calls `waitron wm_config` for configuration. See the
 manual page for `waitron(1)` for details regarding this topic.
 
+If you want to use window rules, a feature that windowchef lacks, you can use
+[ruler](https://github.com/tudurom/ruler).
 
 Dependencies
 ------------
@@ -97,11 +99,14 @@ Features
 	* Activate/Deactivate/Toggle a group
 	* groups can be "sticky": windows are assigned to the currently
 		selected group automatically
+* Respects window resize hints.
 * Simple and stylish solid-color border. Width can be configured
 * Gaps around the monitor and around the cells of the virtual grid(s).
 * Configuration script. Windowchef loads a given script at startup that can be
 	used for configuration with waitron.
 * 100% compatible with window management utilities (e.g. [wmutils](https://github.com/wmutils/)). Windowchef will update its internal state if programs attempt to manage windows. It also applies the correct window decorations when a program focuses a window. This makes it possible to use it as a "backend" with wm utilities.
+
+Many of the featurs listed above are optional and can be disabled.
 
 ### Soon to come
 
@@ -181,5 +186,6 @@ And many, many thanks to contributors:
 * @nullrndtx
 * @dialuplama
 * @allora
+* @onodera-punpun
 
 Thank you for using `windowchef`!

@@ -51,6 +51,9 @@ anything on `stdout`.
 	Hide the border and maximize the focused window on the current monitor.
 	Execute it again after maximizing to revert the state of the window.
 
+* `window_unmaximize`:
+	If the currently focused window is maximized in any way (fully, vertically, horizontally, monocled), return it to normal state.
+
 * `window_hor_maximize`:
 	Horizontally maximize the focused window on the current monitor, preserving
 	its <x> component. Leaves a gap at the left and right of the monitor that
@@ -179,6 +182,9 @@ are:
 	of groups, window that belong to groups whose numbers are greater than <nr>
 	will be mapped to screen and assigned to the null group.
 
+* `enable_resize_hints` <BOOL>:
+	If true, `windowchef` will respect window resize hints as defined by ICCCM. Most terminal emulators should have this feature.
+
 * `enable_sloppy_focus` <BOOL>:
 	Enable sloppy focus.
 
@@ -195,6 +201,10 @@ are:
 * `enable_last_window_focusing` <BOOL>:
 	If true, when the currently focused window is unmapped or closed, `windowchef` will focus the
 	previously focused window. See the `window_focus_last` command.
+
+* `apply_settings` <BOOL>:
+	If true, then some settings will be applied on all windows instead of newly created windows.
+	True by default.
 
 ## SEE ALSO
 

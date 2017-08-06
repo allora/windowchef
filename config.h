@@ -24,6 +24,9 @@
 /* focus windows after hovering them with the pointer */
 #define SLOPPY_FOCUS true
 
+/* respect window resize hints */
+#define RESIZE_HINTS false
+
 /* if true, new windows will be assigned to the last activated group */
 #define STICKY_WINDOWS false
 
@@ -38,5 +41,8 @@
 
 /* Position on the monitor to spawn new windows */
 #define WINDOW_POSITION CENTER
+
+/* if true, apply settings on windows when they are set (like border color, border width) */
+#define APPLY_SETTINGS true
 
 #endif

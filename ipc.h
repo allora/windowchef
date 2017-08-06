@@ -14,6 +14,7 @@ enum IPCCommand {
 	IPCWindowResize,
 	IPCWindowResizeAbsolute,
 	IPCWindowMaximize,
+	IPCWindowUnmaximize,
 	IPCWindowHorMaximize,
 	IPCWindowVerMaximize,
 	IPCWindowMonocle,
@@ -48,10 +49,12 @@ enum IPCConfig {
 	IPCConfigCursorPosition,
 	IPCConfigGroupsNr,
 	IPCConfigEnableSloppyFocus,
+	IPCConfigEnableResizeHints,
 	IPCConfigStickyWindows,
 	IPCConfigEnableBorders,
 	IPCConfigEnableLastWindowFocusing,
 	IPCConfigSpawnLocation,
+	IPCConfigApplySettings,
 	NR_IPC_CONFIGS
 };
 

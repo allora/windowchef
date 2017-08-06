@@ -53,6 +53,7 @@ static struct Command c[] = {
 	{ "window_resize"             , IPCWindowResize          ,  2 , fn_offset   } ,
 	{ "window_resize_absolute"    , IPCWindowResizeAbsolute  ,  2 , fn_naturals } ,
 	{ "window_maximize"           , IPCWindowMaximize        ,  0 , NULL        } ,
+	{ "window_unmaximize"         , IPCWindowUnmaximize      ,  0 , NULL        } ,
 	{ "window_hor_maximize"       , IPCWindowHorMaximize     ,  0 , NULL        } ,
 	{ "window_ver_maximize"       , IPCWindowVerMaximize     ,  0 , NULL        } ,
 	{ "window_monocle"            , IPCWindowMonocle         ,  0 , NULL        } ,
@@ -86,10 +87,12 @@ static struct ConfigEntry configs[] = {
 	{ "cursor_position"     , IPCConfigCursorPosition    , fn_position },
 	{ "groups_nr"           , IPCConfigGroupsNr          , fn_naturals },
 	{ "enable_sloppy_focus" , IPCConfigEnableSloppyFocus , fn_bool     },
+	{ "enable_resize_hints" , IPCConfigEnableResizeHints , fn_bool     },
 	{ "sticky_windows"      , IPCConfigStickyWindows     , fn_bool     },
 	{ "enable_borders"      , IPCConfigEnableBorders     , fn_bool     },
 	{ "enable_last_window_focusing", IPCConfigEnableLastWindowFocusing, fn_bool },
 	{ "spawn_location"      , IPCConfigSpawnLocation     , fn_win_pos  },
+	{ "apply_settings"      , IPCConfigApplySettings     , fn_bool     },
 };
 
 /*
@@ -157,11 +160,12 @@ fn_bool(uint32_t *data, int argc, char **argv) {
 
 static bool
 fn_config(uint32_t *data, int argc, char **argv) {
-	char *key;
+	char *key, *value;
 	bool status;
 	int i;
 
 	key = argv[0];
+	value = argv[1];
 
 	i = 0;
 	while (i < NR_IPC_CONFIGS && strcmp(key, configs[i].key) != 0)

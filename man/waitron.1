@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "WAITRON" "1" "March 2017" "Windowchef" "Windowchef Manual"
+.TH "WAITRON" "1" "July 2017" "Windowchef" "Windowchef Manual"
 .
 .SH "NAME"
 \fBwaitron\fR \- A client for windowchef(1)
@@ -60,6 +60,10 @@ Resize the focused window up to \fIwidth\fR and \fIheight\fR\.
 .TP
 \fBwindow_maximize\fR
 Hide the border and maximize the focused window on the current monitor\. Execute it again after maximizing to revert the state of the window\.
+.
+.TP
+\fBwindow_unmaximize\fR
+If the currently focused window is maximized in any way (fully, vertically, horizontally, monocled), return it to normal state\.
 .
 .TP
 \fBwindow_hor_maximize\fR
@@ -207,6 +211,10 @@ Sets the position of the cursor when moving or resizing windows\.
 Sets the number of groups to \fInr\fR\. If \fInr\fR is less than the current number of groups, window that belong to groups whose numbers are greater than \fInr\fR will be mapped to screen and assigned to the null group\.
 .
 .TP
+\fBenable_resize_hints\fR \fIBOOL\fR
+If true, \fBwindowchef\fR will respect window resize hints as defined by ICCCM\. Most terminal emulators should have this feature\.
+.
+.TP
 \fBenable_sloppy_focus\fR \fIBOOL\fR
 Enable sloppy focus\.
 .
@@ -221,6 +229,10 @@ If true, border colors will be set each time a window gets/loses focus\. Setting
 .TP
 \fBenable_last_window_focusing\fR \fIBOOL\fR
 If true, when the currently focused window is unmapped or closed, \fBwindowchef\fR will focus the previously focused window\. See the \fBwindow_focus_last\fR command\.
+.
+.TP
+\fBapply_settings\fR \fIBOOL\fR
+If true, then some settings will be applied on all windows instead of newly created windows\. True by default\.
 .
 .SH "SEE ALSO"
 windowchef(1), sxhkd(1), wmutils(1), pfw(1), lsw(1), chwb2(1), lemonbar(1)
