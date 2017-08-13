@@ -85,8 +85,11 @@ static struct Command c[] = {
 
 static struct ConfigEntry configs[] = {
 	{ "border_width"        , IPCConfigBorderWidth       , 1 , fn_naturals },
+    { "border_iwidth"       , IPCConfigBorderIWidth      , 1 , fn_naturals },
 	{ "color_focused"       , IPCConfigColorFocused      , 1 , fn_hex      },
+	{ "color_ifocused"      , IPCConfigColorIFocused     , 1 , fn_hex      },
 	{ "color_unfocused"     , IPCConfigColorUnfocused    , 1 , fn_hex      },
+	{ "color_iunfocused"    , IPCConfigColorIUnfocused   , 1 , fn_hex      },
 	{ "gap_width"           , IPCConfigGapWidth          , 2 , fn_gap      },
 	{ "grid_gap_width"      , IPCConfigGridGapWidth      , 1 , fn_naturals },
 	{ "cursor_position"     , IPCConfigCursorPosition    , 1 , fn_position },

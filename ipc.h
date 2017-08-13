@@ -43,8 +43,11 @@ enum IPCCommand {
 
 enum IPCConfig {
 	IPCConfigBorderWidth,
+	IPCConfigBorderIWidth,
 	IPCConfigColorFocused,
+	IPCConfigColorIFocused,
 	IPCConfigColorUnfocused,
+	IPCConfigColorIUnfocused,
 	IPCConfigGapWidth,
 	IPCConfigGridGapWidth,
 	IPCConfigCursorPosition,
