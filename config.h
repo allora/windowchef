@@ -1,4 +1,5 @@
-/* See the LICENSE file for copyright and license details. */
+/* Copyright (c) 2016, 2017 Tudor Ioan Roman. All rights reserved. */
+/* Licensed under the ISC License. See the LICENSE file in the project root for full license information. */
 
 #ifndef _CONFIG_H
 #define _CONFIG_H
@@ -44,5 +45,17 @@
 
 /* if true, apply settings on windows when they are set (like border color, border width) */
 #define APPLY_SETTINGS true
+
+/* default pointer actions */
+#define DEFAULT_LEFT_BUTTON_ACTION POINTER_ACTION_MOVE
+#define DEFAULT_MIDDLE_BUTTON_ACTION POINTER_ACTION_RESIZE_SIDE
+#define DEFAULT_RIGHT_BUTTON_ACTION POINTER_ACTION_RESIZE_CORNER
+
+/* default pointer modifier (super key). Set to XCB_MOD_MASK_1 for alt */
+#define POINTER_MODIFIER XCB_MOD_MASK_4
+
+/* default mouse button for click to focus. -1 for none, 0 for any
+   1, 2, 3 for left-click, middle-click, right-click */
+#define CLICK_TO_FOCUS_BUTTON 0
 
 #endif

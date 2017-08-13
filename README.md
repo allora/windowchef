@@ -56,8 +56,16 @@ If you want to use window rules, a feature that windowchef lacks, you can use
 Dependencies
 ------------
 
+* `xcb`
+* `xcb-randr`
+* `xcb-util-wm`
+* `xcb-keysyms`
+* `xproto` (compile-time dependency)
+
 Windowchef depends on `xcb` to communicate with the X11 server, `xcb-randr` to
 gather information about connected displays and `xcb-util-wm` for ewmh and icccm helper functions.
+
+`xcb-keysyms` and `xproto` are required for mouse support.
 
 I couldn't find compiled documentation for `xcb-util-wm` so I compiled it and
 put it on my website [here](https://tudorr.xyz/res/).
