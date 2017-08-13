@@ -103,7 +103,7 @@ static struct ConfigEntry configs[] = {
 	{ "pointer_actions"     , IPCConfigPointerActions    , 3 , fn_pac      },
 	{ "pointer_modifier"    , IPCConfigPointerModifier   , 1 , fn_mod      },
 	{ "click_to_focus"      , IPCConfigClickToFocus      , 1 , fn_button   },
-    { "spawn_location"      , IPCConfigSpawnLocation     , 1 , fn_win_pos  },
+    { "spawn_location"      , IPCConfigSpawnLocation     , 2 , fn_win_pos  },
 };
 
 /*
