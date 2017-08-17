@@ -2143,9 +2143,6 @@ change_nr_of_groups(uint32_t groups)
 static void
 refresh_borders(void)
 {
-	if (!conf.apply_settings)
-		return;
-
 	struct list_item *item;
 	struct client *client;
 
