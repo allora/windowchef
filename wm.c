@@ -3005,6 +3005,7 @@ ipc_window_put_in_grid(uint32_t *d)
 		return;
 
 	grid_window(focused_win, grid_width, grid_height, grid_x, grid_y);
+	refresh_borders();
 }
 
 static void
