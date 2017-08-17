@@ -911,11 +911,11 @@ find_window_spawn_location(struct client *c, int16_t *x, int16_t *y)
 
 	int16_t y_top = mon_y + conf.gap_up;
 	int16_t y_center = ((mon_y + mon_height) / 2) - ((c->geom.height + (conf.border_width * 2)) / 2);
-	int16_t y_bottom = (mon_y + mon_height) - c->geom.height - conf.gap_down;
+	int16_t y_bottom = (mon_y + mon_height) - c->geom.height - conf.gap_down - conf.border_width * 2;
 
 	int16_t x_left = mon_x + conf.gap_left;
 	int16_t x_center = ((mon_x + mon_width) / 2) - ((c->geom.width + (conf.border_width * 2)) / 2);
-	int16_t x_right = (mon_x + mon_width) - c->geom.width - conf.gap_right;
+	int16_t x_right = (mon_x + mon_width) - c->geom.width - conf.gap_right - conf.border_width * 2;
 
 	switch (conf.window_position) {
 		case TOP_LEFT:
@@ -3015,6 +3015,7 @@ ipc_window_snap(uint32_t *d)
 {
 	enum position pos = d[0];
 	snap_window(focused_win, pos);
+    refresh_borders();
 }
 
 static
