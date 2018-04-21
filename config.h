@@ -5,13 +5,13 @@
 #define _CONFIG_H
 
 #define BORDER_WIDTH 5
-#define BORDER_IWIDTH 0
+#define INTERNAL_BORDER_WIDTH 0
 
 /* colors are HTML colors that start in "0x" instead of "#" */
 #define COLOR_FOCUS 0x97a293
-#define COLOR_IFOCUS 0x97a293
 #define COLOR_UNFOCUS 0x393638
-#define COLOR_IUNFOCUS 0x97a293
+#define INTERNAL_COLOR_FOCUS 0x393638
+#define INTERNAL_COLOR_UNFOCUS 0x97a293
 
 /* gap between the window and the edge of the monitor
  * when snapping or vertically/horizontally maximizing window */
@@ -48,6 +48,9 @@
 
 /* if true, apply settings on windows when they are set (like border color, border width) */
 #define APPLY_SETTINGS true
+
+/* When clicking a window to focus it, send the click to it too. */
+#define REPLAY_CLICK_ON_FOCUS true
 
 /* default pointer actions */
 #define DEFAULT_LEFT_BUTTON_ACTION POINTER_ACTION_MOVE

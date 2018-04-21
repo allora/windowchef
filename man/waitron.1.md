@@ -176,6 +176,16 @@ are:
 	<color> is a hexadecimal value that may or may not start with `0x`
 	prefix. Example: `0x1234ef`.
 
+* `internal_border_width` <width>:
+	Make the first <width> pixels from the interior to the exterior of the
+	border of another color, so you get two borders.
+	The width of the external border is `border_width -
+	internal_border_width`.
+
+* `internal_color_focused`, `internal_color_unfocused` <color>:
+	Like `color_focused` and `color_unfocused`, but for the internal
+	border.
+
 * `gap_width` <POSITION> <width>:
 	Sets the window gap at <POSITION> to <width>. <POSITION> can be equal to
 	`all` to set all gaps to <POSITION>.
@@ -214,6 +224,11 @@ are:
 * `apply_settings` <BOOL>:
 	If true, then some settings will be applied on all windows instead of newly created windows.
 	True by default.
+
+* `replay_click_on_focus` <BOOL>:
+	If true, when clicking on an unfocused with the intent to focus it, windowchef will also send
+	the click event to the target window. If false, the window will receive the click event only
+	if it's already focused.
 
 * `pointer_actions` <POINTER_ACTION> <POINTER_ACTION> <POINTER_ACTION>:
 	Sets the action that should be done whenever the modifier key and the corresponding button

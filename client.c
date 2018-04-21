@@ -85,11 +85,11 @@ static struct Command c[] = {
 
 static struct ConfigEntry configs[] = {
 	{ "border_width"        , IPCConfigBorderWidth       , 1 , fn_naturals },
-    { "border_iwidth"       , IPCConfigBorderIWidth      , 1 , fn_naturals },
 	{ "color_focused"       , IPCConfigColorFocused      , 1 , fn_hex      },
-	{ "color_ifocused"      , IPCConfigColorIFocused     , 1 , fn_hex      },
-	{ "color_unfocused"     , IPCConfigColorUnfocused    , 1 , fn_hex      },
-	{ "color_iunfocused"    , IPCConfigColorIUnfocused   , 1 , fn_hex      },
+    { "color_unfocused"     , IPCConfigColorUnfocused    , 1 , fn_hex      },
+	{ "internal_border_width", IPCConfigInternalBorderWidth, 1 , fn_naturals },
+	{ "internal_color_focused", IPCConfigInternalColorFocused, 1 , fn_hex },
+	{ "internal_color_unfocused", IPCConfigInternalColorUnfocused, 1 , fn_hex },
 	{ "gap_width"           , IPCConfigGapWidth          , 2 , fn_gap      },
 	{ "grid_gap_width"      , IPCConfigGridGapWidth      , 1 , fn_naturals },
 	{ "cursor_position"     , IPCConfigCursorPosition    , 1 , fn_position },
@@ -100,6 +100,7 @@ static struct ConfigEntry configs[] = {
 	{ "enable_borders"      , IPCConfigEnableBorders     , 1 , fn_bool     },
 	{ "enable_last_window_focusing", IPCConfigEnableLastWindowFocusing, 1 , fn_bool },
 	{ "apply_settings"      , IPCConfigApplySettings     , 1 , fn_bool     },
+	{ "replay_click_on_focus" , IPCConfigReplayClickOnFocus, 1, fn_bool    },
 	{ "pointer_actions"     , IPCConfigPointerActions    , 3 , fn_pac      },
 	{ "pointer_modifier"    , IPCConfigPointerModifier   , 1 , fn_mod      },
 	{ "click_to_focus"      , IPCConfigClickToFocus      , 1 , fn_button   },
